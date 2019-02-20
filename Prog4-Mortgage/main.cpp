@@ -1,5 +1,12 @@
+//============================================================
+// Trung Nguyenvo
+// due: 2.20.19
+// Programming Assignment #4
+// Description: Mortgage
+//============================================================
 #include <iostream>
 #include <string>
+#include <iomanip>
 using namespace std;
 
 #include "Mortgage.h"
@@ -10,15 +17,16 @@ bool verify(string input, float &val);
 
 int main()
 {
-	float loan;
-	int years;
-	float rate;
-	bool validYear = true;
-	bool validLoan = true;
-	bool validRate = true;
-	string sloan;
-	string syears;
-	string srate;
+	float loan = 20;		// holds loan value, initialized to test constructor
+	int years = 1;			// holds year value, initialized to test constructor
+	float rate = 1;			// holds rate value, initialized to test constructor
+	bool validYear = true;	// returns true if input for years is true
+	bool validLoan = true;	// returns true if input for loan amount is true
+	bool validRate = true;	// returns true if input for interest rate is true
+	string sloan;			// holds loan input from user to convert to float
+	string syears;			// holds year input from user to convert to float
+	string srate;			// holds rate input from user to convert to float
+	Mortgage a(loan, years, rate); // creating mortgage instance 'a' and testing constructor
 
 // get input from user	
 	cout << "What is your loan amount?" << endl;
@@ -46,7 +54,11 @@ int main()
 	}
 	else
 	{
-		Mortgage a(loan, years, rate);
+		// tests set and get member functions
+		a.setLoan(loan); 
+		a.setRate(rate);
+		a.setYear(years);
+		cout << fixed << setprecision(2);
 		cout << "monthly payment: " << a.getMonthlyPayment() << endl;
 		cout << "total payment overall: " << a.getTotalPaid() << endl;
 	}
@@ -54,6 +66,12 @@ int main()
 	return 0;
 }
 
+/*===================================
+name: verify 
+function: verifies that user input is an int
+parameters: inputyear - user input as a string; years - user input converted to int
+return: true if input is an int
+=====================================*/
 bool verify(string inputyear, int &years)
 {
 	bool validInput = true;
@@ -71,6 +89,12 @@ bool verify(string inputyear, int &years)
 	return validInput;
 }
 
+/*===================================
+name: verify
+function: verifies that user input is a float
+parameters: inputyear - user input as a string; years - user input converted to float
+return: true if input is a float
+=====================================*/
 bool verify(string input, float &val)
 {
 	bool validInput = true;
@@ -88,6 +112,11 @@ bool verify(string input, float &val)
 	return validInput;
 }
 
+/*===================================
+name: parseInt
+function: validates input is an int
+return: true if it is an int, false if not
+=====================================*/
 bool parseInt(string sval, int& val)
 {
 	int num;
@@ -104,6 +133,11 @@ bool parseInt(string sval, int& val)
 	return success;
 }
 
+/*===================================
+name: parseFloat
+function: validates input is a float
+return: true if it is a float, false if not
+=====================================*/
 bool parseFloat(string sval, float& val)
 {
 	float num;
